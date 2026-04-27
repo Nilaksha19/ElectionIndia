@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SahyogBaba – India's Civic AI Guide</title>
+  <meta name="description" content="SahyogBaba – Your friendly AI assistant for understanding Indian elections, Vidhan Sabha, ministers, constituency info and democratic rights." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<!-- ===== NAV ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-brand">
+    <div class="brand-icon">
+      <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="19" stroke="url(#brandGrad)" stroke-width="2"/>
+        <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="url(#brandGrad)" font-family="Inter" font-weight="800">स</text>
+        <defs><linearGradient id="brandGrad" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#FF9933"/><stop offset="1" stop-color="#138808"/></linearGradient></defs>
+      </svg>
+    </div>
+    <span class="brand-name">SahyogBaba</span>
+  </div>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#home" class="nav-link active">Home</a></li>
+    <li><a href="#elections" class="nav-link">Elections</a></li>
+    <li><a href="#states" class="nav-link">States</a></li>
+    <li><a href="#ministers" class="nav-link">Ministers</a></li>
+    <li><a href="#portals" class="nav-link">Gov Portals</a></li>
+    <li><a href="#chatbot" class="nav-link ask-btn">Ask SahyogBaba</a></li>
+  </ul>
+  <div class="nav-actions">
+    <button class="lang-toggle" id="langToggle" title="Switch Language">
+      <span id="langLabel">EN</span>
+    </button>
+    <button class="theme-toggle" id="themeToggle" title="Toggle Theme">
+      <svg id="themeIcon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+        <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+      </svg>
+    </button>
+    <button class="hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- ===== HERO ===== -->
+<section class="hero" id="home">
+  <div class="hero-bg">
+    <div class="tricolor-bar saffron"></div>
+    <div class="tricolor-bar white"></div>
+    <div class="tricolor-bar green"></div>
+  </div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-badge">
+      <span class="badge-dot"></span>
+      <span>India's Civic AI Platform</span>
+    </div>
+    <h1 class="hero-title">
+      नमस्ते, I'm <span class="gradient-text">SahyogBaba</span>
+    </h1>
+    <p class="hero-subtitle">Your friendly guide to Indian Democracy – Elections, Ministers, Vidhan Sabha, and your Democratic Rights.</p>
+    <div class="search-bar-container">
+      <div class="search-bar" id="heroSearchBar">
+        <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        <input type="text" class="search-input" id="heroSearch" placeholder="Ask anything about Indian Elections…" autocomplete="off" />
+        <button class="search-btn" id="heroSearchBtn">Ask</button>
+        <button class="voice-btn" id="voiceBtn" title="Voice Search">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+        </button>
+      </div>
+    </div>
+    <div class="quick-btns">
+      <button class="quick-btn" onclick="askQuestion('Upcoming Elections 2025')">🗳️ Upcoming Elections</button>
+      <button class="quick-btn" onclick="askQuestion('Voting Process India')">📋 Voting Process</button>
+      <button class="quick-btn" onclick="askQuestion('How to register as a voter in India')">📝 Voter Registration</button>
+      <button class="quick-btn" onclick="askQuestion('What is Lok Sabha and Rajya Sabha')">🏛️ Parliament</button>
+      <button class="quick-btn" onclick="askQuestion('EVM and VVPAT explanation')">🖥️ EVM / VVPAT</button>
+      <button class="quick-btn" onclick="openStateExplorer()">🗺️ State Explorer</button>
+    </div>
+  </div>
+  <div class="india-map-container">
+    <div class="map-glow"></div>
+    <div class="india-svg-wrapper" id="indiaMapWrapper">
+      <!-- India SVG map injected by JS -->
+    </div>
+    <div class="map-legend">
+      <div class="legend-item"><span class="leg-dot bjp"></span>BJP</div>
+      <div class="legend-item"><span class="leg-dot inc"></span>INC</div>
+      <div class="legend-item"><span class="leg-dot aap"></span>AAP</div>
+      <div class="legend-item"><span class="leg-dot tmc"></span>TMC</div>
+      <div class="legend-item"><span class="leg-dot other"></span>Others</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS STRIP ===== -->
+<section class="stats-strip">
+  <div class="stat-card"><div class="stat-num" data-target="28">0</div><div class="stat-label">States</div></div>
+  <div class="stat-card"><div class="stat-num" data-target="8">0</div><div class="stat-label">Union Territories</div></div>
+  <div class="stat-card"><div class="stat-num" data-target="543">0</div><div class="stat-label">Lok Sabha Seats</div></div>
+  <div class="stat-card"><div class="stat-num" data-target="245">0</div><div class="stat-label">Rajya Sabha Seats</div></div>
+  <div class="stat-card"><div class="stat-num" data-target="4120">0</div><div class="stat-label">Vidhan Sabha Seats</div></div>
+  <div class="stat-card"><div class="stat-num" data-target="97">0</div><div class="stat-label">Crore+ Voters</div></div>
+</section>
+
+<!-- ===== ELECTIONS SECTION ===== -->
+<section class="section" id="elections">
+  <div class="section-header">
+    <h2 class="section-title">🗳️ Elections in India</h2>
+    <p class="section-sub">Everything you need to know about the world's largest democracy</p>
+  </div>
+  <div class="tabs-container">
+    <div class="tabs">
+      <button class="tab active" data-tab="howworks">How Elections Work</button>
+      <button class="tab" data-tab="upcoming">Upcoming Elections</button>
+      <button class="tab" data-tab="parliament">Parliament</button>
+      <button class="tab" data-tab="process">Voting Process</button>
+    </div>
+    <div class="tab-content active" id="tab-howworks">
+      <div class="steps-grid">
+        <div class="step-card"><div class="step-num">01</div><div class="step-title">Announcement</div><div class="step-desc">Election Commission announces election schedule, Model Code of Conduct begins.</div></div>
+        <div class="step-card"><div class="step-num">02</div><div class="step-title">Nominations</div><div class="step-desc">Candidates file nomination papers with returning officer. Scrutiny and withdrawal periods follow.</div></div>
+        <div class="step-card"><div class="step-num">03</div><div class="step-title">Campaigning</div><div class="step-desc">Parties and candidates campaign under Model Code of Conduct. Expenditure limits apply.</div></div>
+        <div class="step-card"><div class="step-num">04</div><div class="step-title">Voting Day</div><div class="step-desc">Voters cast votes using EVMs (Electronic Voting Machines) with VVPAT verification slips.</div></div>
+        <div class="step-card"><div class="step-num">05</div><div class="step-title">Counting</div><div class="step-desc">Votes counted at counting centers under strict observation. Results declared constituency-wise.</div></div>
+        <div class="step-card"><div class="step-num">06</div><div class="step-title">Government Formation</div><div class="step-desc">Winning party/alliance with majority forms government. CM/PM sworn in by Governor/President.</div></div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-upcoming">
+      <div class="elections-grid" id="upcomingElections"></div>
+    </div>
+    <div class="tab-content" id="tab-parliament">
+      <div class="parliament-layout">
+        <div class="parliament-card lok">
+          <div class="parl-icon">🏛️</div>
+          <h3>Lok Sabha</h3>
+          <p class="parl-sub">House of the People</p>
+          <div class="parl-stats">
+            <div><strong>543</strong><span>Seats</span></div>
+            <div><strong>5 yrs</strong><span>Term</span></div>
+            <div><strong>18+</strong><span>Voter Age</span></div>
+          </div>
+          <p>Lower house of Parliament. Members directly elected by people. PM must command majority here.</p>
+        </div>
+        <div class="parliament-card rajya">
+          <div class="parl-icon">🏟️</div>
+          <h3>Rajya Sabha</h3>
+          <p class="parl-sub">Council of States</p>
+          <div class="parl-stats">
+            <div><strong>245</strong><span>Seats</span></div>
+            <div><strong>6 yrs</strong><span>Term</span></div>
+            <div><strong>1/3</strong><span>Retire/2yr</span></div>
+          </div>
+          <p>Upper house. Members elected by State Legislative Assemblies. Never fully dissolved.</p>
+        </div>
+        <div class="parliament-card vidhan">
+          <div class="parl-icon">🏗️</div>
+          <h3>Vidhan Sabha</h3>
+          <p class="parl-sub">State Legislative Assembly</p>
+          <div class="parl-stats">
+            <div><strong>4120+</strong><span>Total Seats</span></div>
+            <div><strong>5 yrs</strong><span>Term</span></div>
+            <div><strong>28+8</strong><span>States+UTs</span></div>
+          </div>
+          <p>State legislature. MLAs directly elected. CM leads the state cabinet and administration.</p>
+        </div>
+      </div>
+    </div>
+    <div class="tab-content" id="tab-process">
+      <div class="process-accordion" id="processAccordion"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATES SECTION ===== -->
+<section class="section alt" id="states">
+  <div class="section-header">
+    <h2 class="section-title">🗺️ State Explorer</h2>
+    <p class="section-sub">Click any state to explore – CM, Ministers, Vidhan Sabha, and more</p>
+  </div>
+  <div class="state-search-bar">
+    <input type="text" id="stateSearch" placeholder="Search state…" class="state-search-input" />
+  </div>
+  <div class="states-grid" id="statesGrid"></div>
+</section>
+
+<!-- ===== MINISTERS SECTION ===== -->
+<section class="section" id="ministers">
+  <div class="section-header">
+    <h2 class="section-title">👤 Ministers Hub</h2>
+    <p class="section-sub">Current Chief Ministers and Cabinet across India</p>
+  </div>
+  <div class="cm-grid" id="cmGrid"></div>
+</section>
+
+<!-- ===== GOVERNMENT PORTALS ===== -->
+<section class="section alt" id="portals">
+  <div class="section-header">
+    <h2 class="section-title">🔗 Official Government Portals</h2>
+    <p class="section-sub">Verified links to key government websites</p>
+  </div>
+  <div class="portals-grid" id="portalsGrid"></div>
+</section>
+
+<!-- ===== STATE MODAL ===== -->
+<div class="modal-overlay" id="stateModal">
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose">✕</button>
+    <div class="modal-body" id="modalBody"></div>
+  </div>
+</div>
+
+<!-- ===== CHATBOT ===== -->
+<div class="chatbot-widget" id="chatbotWidget">
+  <div class="chatbot-header">
+    <div class="bot-avatar">
+      <svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="19" fill="url(#botGrad)"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="white" font-family="Inter" font-weight="800">स</text><defs><linearGradient id="botGrad" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#FF9933"/><stop offset="1" stop-color="#138808"/></linearGradient></defs></svg>
+    </div>
+    <div>
+      <div class="bot-name">SahyogBaba</div>
+      <div class="bot-status"><span class="status-dot"></span> Online</div>
+    </div>
+    <button class="chat-minimize" id="chatMinimize">−</button>
+  </div>
+  <div class="chatbot-messages" id="chatMessages"></div>
+  <div class="chatbot-input">
+    <input type="text" id="chatInput" placeholder="Ask about elections, ministers…" />
+    <button id="chatSend">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+    </button>
+  </div>
+  <div class="quick-suggestions" id="quickSuggestions">
+    <button onclick="sendChat('Who is the PM of India?')">PM of India</button>
+    <button onclick="sendChat('How to register as voter?')">Voter Registration</button>
+    <button onclick="sendChat('What is EVM?')">EVM Info</button>
+  </div>
+</div>
+<button class="chatbot-fab" id="chatbotFab" title="Ask SahyogBaba">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+  <span class="fab-label">Ask SahyogBaba</span>
+</button>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <div class="brand-icon">
+        <svg viewBox="0 0 40 40" fill="none"><circle cx="20" cy="20" r="19" stroke="url(#fg)" stroke-width="2"/><text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" font-size="18" fill="url(#fg)" font-family="Inter" font-weight="800">स</text><defs><linearGradient id="fg" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#FF9933"/><stop offset="1" stop-color="#138808"/></linearGradient></defs></svg>
+      </div>
+      <div>
+        <div class="brand-name">SahyogBaba</div>
+        <div class="footer-tagline">Empowering Democracy through Awareness</div>
+      </div>
+    </div>
+    <div class="footer-links-group">
+      <div class="footer-col"><h4>Platform</h4><a href="#elections">Elections</a><a href="#states">States</a><a href="#ministers">Ministers</a><a href="#portals">Gov Portals</a></div>
+      <div class="footer-col"><h4>Learn</h4><a href="#" onclick="askQuestion('Voting Process India')">How to Vote</a><a href="#" onclick="askQuestion('How to register as voter')">Voter Registration</a><a href="#" onclick="askQuestion('What is EVM VVPAT')">EVM & VVPAT</a><a href="#" onclick="askQuestion('Model Code of Conduct')">Model Code</a></div>
+      <div class="footer-col"><h4>Official Links</h4><a href="https://eci.gov.in" target="_blank">ECI</a><a href="https://nvsp.in" target="_blank">NVSP Portal</a><a href="https://india.gov.in" target="_blank">India.gov.in</a><a href="https://parliament.nic.in" target="_blank">Parliament</a></div>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SahyogBaba. Civic awareness platform for Indian citizens.</p>
+    <p class="disclaimer">⚠️ Disclaimer: SahyogBaba is an independent civic education platform. Not affiliated with the Election Commission of India. Data is for educational purposes.</p>
+  </div>
+</footer>
+
+<script src="data.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
